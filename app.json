@@ -4,11 +4,11 @@
     "slug": "rn-paper-theme-config-with-expo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashscreen.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#eaeaea"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

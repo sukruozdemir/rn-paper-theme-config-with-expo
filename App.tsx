@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import AppLoading from 'expo-app-loading';
 import * as React from 'react';
 import { enableScreens } from 'react-native-screens';
 import { ThemeProvider } from './src/context/ThemeContext';
@@ -12,22 +12,28 @@ export default function App() {
   const [isAppReady, setIsAppReady] = React.useState<boolean>(false);
   const [restoredThemeName, setRestoredThemeName] = React.useState<ThemeName>('light');
 
-  React.useEffect(() => {
-    const restore = async () => {
-      try {
-        // Restore state from AsyncStorage with helper methods
-        const themeName: ThemeName = await restoreThemeState();
+  const restore = async () => {
+    try {
+      // Restore state from AsyncStorage with helper methods
+      const themeName: ThemeName = await restoreThemeState();
 
-        setRestoredThemeName(themeName);
-      } catch (e) {
-        // TODO: Handle error
-      } finally {
-        setIsAppReady(true);
-      }
-    };
+      setRestoredThemeName(themeName);
+    } catch (e) {
+      // TODO: Handle error
+    } finally {
+      setIsAppReady(true);
+    }
+  };
 
-    restore();
-  });
+  if (!isAppReady) {
+    return (
+      <AppLoading
+        startAsync={restore}
+        onFinish={() => setIsAppReady(true)}
+        onError={console.warn}
+      />
+    );
+  }
 
   // Don't render until app is ready to go
   if (!isAppReady) return null;
